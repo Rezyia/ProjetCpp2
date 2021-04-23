@@ -4,7 +4,7 @@
 class CGraphe
 {
 private:
-	CSommet** ppGPHSommets;
+	CSommet** ppSomGPHSommets;
 
 public:
 	CGraphe();
