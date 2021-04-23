@@ -35,7 +35,30 @@ public:
 	bool SOMIsArcExist(CSommet* pArgDestination); //Vérifie si un arc vers la destination existe
 	void SOMAjouterArc(CSommet* pArgDestination); // Ajouter l'arc du sommet appelé vers la destination.
 	void SOMSupprimerArc(CSommet* pArgDestination); // Supprimer l'arc du sommet appelé vers la destination.
-	//CArc* SOMGetArc(CSommet* pArgDestination); // Retoure l'arc du sommet vers la destination passée en paramètre.
+	
+	
+	/* Retoure un arc du tableau des arcs arrivants.
+		Entrée : 
+			- uiArgId : indice de l'arc dans le tableau
+		Sortie:
+			- Le CArc de l'indice donné
+	*/
+	CArc* SOMGetArcArrivant(unsigned int uiArgId)
+	{
+		return ppArcSomArrivants[uiArgId];
+	}
+
+
+	/* Retoure un arc du tableau des arcs partants.
+		Entrée :
+			- uiArgId : indice de l'arc dans le tableau
+		Sortie:
+			- Le CArc de l'indice donné
+	*/
+	CArc* SOMGetArcPartant(unsigned int uiArgId)
+	{
+		return ppArcSomPartants[uiArgId];
+	}
 
 
 	/* Retourne un nouveau tableau de dimension uiArgNbNew avec les valeurs recopiées de ppArcArg

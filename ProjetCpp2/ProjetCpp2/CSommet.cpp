@@ -57,8 +57,9 @@ CArc** CSommet::SOMCopieTabArcs(CArc** ppArcArg, unsigned int uiArgNbNew, unsign
 	unsigned int uiMinNb = uiArgNbNew;
 	if (uiMinNb > uiArgNbOld) uiMinNb = uiArgNbOld;
 
+	// On suppose qu'il n'y aura pas de copie de dimensions plus faible
 	for (unsigned int uiBoucleCopie = 0; uiBoucleCopie < uiMinNb; uiBoucleCopie++) {
-		
+		newTab[uiBoucleCopie] = ppArcArg[uiBoucleCopie];
 	}
 
 	return newTab;
@@ -68,4 +69,5 @@ CArc** CSommet::SOMCopieTabArcs(CArc** ppArcArg, unsigned int uiArgNbNew, unsign
 void CSommet::SOMAjouterArc(CSommet* pArgDestination) {
 	
 }
+
 
