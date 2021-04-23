@@ -5,6 +5,7 @@ class CGraphe
 {
 private:
 	CSommet** ppSomGPHSommets;
+	unsigned int uiGPHNbSommets;
 
 public:
 	CGraphe();

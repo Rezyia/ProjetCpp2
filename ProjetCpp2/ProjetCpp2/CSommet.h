@@ -26,11 +26,16 @@ public:
 	~CSommet();
 
 
-	bool SOMIsEmptyArrivants();
-	bool SOMIsEmptyPartants();
+	bool SOMIsEmptyArrivants() {
+		return uiSOMNbArrivants == 0;
+	}
+	bool SOMIsEmptyPartants() {
+		return uiSOMNbPartants == 0;
+	}
 	bool SOMIsArcExist(CSommet* pArgDestination); //Vérifie si un arc vers la destination existe
 	void SOMAjouterArc(CSommet* pArgDestination); // Ajouter l'arc du sommet appelé vers la destination.
 	void SOMSupprimerArc(CSommet* pArgDestination); // Supprimer l'arc du sommet appelé vers la destination.
+<<<<<<< HEAD
 	//CArc* SOMGetArc(CSommet* pArgDestination); // Retoure l'arc du sommet vers la destination passée en paramètre.
 
 
@@ -43,6 +48,9 @@ public:
 			- Recopie de l'ancien tableau avec les nouvelles dimensions
 	*/
 	CArc** SOMCopieTabArcs(CArc** ppArcArg, unsigned int uiArgNbNew, unsigned int uiArgNbOld);
+=======
+	CArc* SOMGetArc(CSommet* pArgDestination); // Retoure le pointeur sur l'arc du sommet vers la destination passée en paramètre.
+>>>>>>> 812c8bda4986a6b2e8954b1438dec644b00c315e
 
 
 	// Getter : retourne le numéro du sommet
