@@ -1,8 +1,8 @@
 #include "CGraphe.h"
 #include "CException.h"
 
-#define ERROR_SOMMET_EXIST "Le sommet existe deja";
-#define ERROR_SOMMET_NOT_EXIST "Le sommet n'existe pas";
+#define ERROR_SOMMET_EXIST "Le sommet existe deja"
+#define ERROR_SOMMET_NOT_EXIST "Le sommet n'existe pas"
 
 CGraphe::CGraphe()
 {
