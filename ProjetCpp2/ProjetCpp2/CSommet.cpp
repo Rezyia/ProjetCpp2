@@ -50,3 +50,22 @@ CSommet::~CSommet(){
 	 free(ppArcSomPartants);
 }
 
+
+CArc** CSommet::SOMCopieTabArcs(CArc** ppArcArg, unsigned int uiArgNbNew, unsigned int uiArgNbOld) {
+	CArc** newTab = (CArc**) malloc(sizeof(CArc*) * uiArgNbNew);
+
+	unsigned int uiMinNb = uiArgNbNew;
+	if (uiMinNb > uiArgNbOld) uiMinNb = uiArgNbOld;
+
+	for (unsigned int uiBoucleCopie = 0; uiBoucleCopie < uiMinNb; uiBoucleCopie++) {
+		
+	}
+
+	return newTab;
+}
+
+
+void CSommet::SOMAjouterArc(CSommet* pArgDestination) {
+	
+}
+

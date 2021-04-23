@@ -31,7 +31,18 @@ public:
 	bool SOMIsArcExist(CSommet* pArgDestination); //Vérifie si un arc vers la destination existe
 	void SOMAjouterArc(CSommet* pArgDestination); // Ajouter l'arc du sommet appelé vers la destination.
 	void SOMSupprimerArc(CSommet* pArgDestination); // Supprimer l'arc du sommet appelé vers la destination.
-	CArc* SOMGetArc(CSommet* pArgDestination); // Retoure l'arc du sommet vers la destination passée en paramètre.
+	//CArc* SOMGetArc(CSommet* pArgDestination); // Retoure l'arc du sommet vers la destination passée en paramètre.
+
+
+	/* Retourne un nouveau tableau de dimension uiArgNbNew avec les valeurs recopiées de ppArcArg
+		Entrée :
+			- ppArcArg : Tableau a copier
+			- uiArgNbNew : Taille du nouveau tableau
+			- uiArgNbOld : Taille de l'ancien tableau
+		Sortie :
+			- Recopie de l'ancien tableau avec les nouvelles dimensions
+	*/
+	CArc** SOMCopieTabArcs(CArc** ppArcArg, unsigned int uiArgNbNew, unsigned int uiArgNbOld);
 
 
 	// Getter : retourne le numéro du sommet
@@ -49,7 +60,11 @@ public:
 		return uiSOMNbArrivants;
 	}
 
-	// Setter : associe le numéro du sommet avec l'argument passé en paramètre
+
+	/* Associe le numéro du sommet avec l'argument passé en paramètre
+		Entrée :
+			- uiArgNum : Nouveau numéro du sommet
+	*/
 	void SOMSetNumero(unsigned int uiArgNum) {
 		uiSOMNumero = uiArgNum;
 	}

@@ -1,7 +1,7 @@
 #include "CGraphe.h"
 #include "CException.h"
 
-#define ERROR_SOMMET_EXIST "Le sommet existe déjà";
+#define ERROR_SOMMET_EXIST "Le sommet existe deja";
 #define ERROR_SOMMET_NOT_EXIST "Le sommet n'existe pas";
 
 CGraphe::CGraphe()
@@ -16,7 +16,7 @@ void CGraphe::GPHAjouterSommet(CSommet * pArgSommet)
 {
 	try {
 		if (GPHSommetExists(pArgSommet)) {
-			throw new CException(ERROR_SOMMET_EXIST);
+			throw new CException((char*)ERROR_SOMMET_EXIST);
 		}
 		//TODO : reste du code
 	}
@@ -29,7 +29,7 @@ void CGraphe::GPHSupprimerSommet(CSommet * pArgSommet)
 {
 	try {
 		if (!GPHSommetExists(pArgSommet)) {
-			throw new CException(ERROR_SOMMET_NOT_EXIST);
+			throw new CException((char*)ERROR_SOMMET_NOT_EXIST);
 		}
 		//TODO : reste du code
 	}
