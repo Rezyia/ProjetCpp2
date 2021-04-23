@@ -15,7 +15,7 @@ public:
 		uiARCDestination = ARCarg->ARCGetNumero();
 	}
 
-	// Fonction d'affichage du l'arc
+	// Fonction d'affichage de l'arc
 	void ARCAfficher() {
 		std::cout << "Arc vers " + uiARCDestination;
 	}
