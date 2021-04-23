@@ -1,4 +1,8 @@
 #include "CSommet.h"
+#include "CException.h"
+
+#define ERROR_ARC_EXIST "L'arc existe deja"
+#define ERROR_ARC_NOT_EXIST "L'arc n'existe pas"
 
 CSommet::CSommet() {
 	uiSOMNumero = -1;
@@ -66,8 +70,34 @@ CArc** CSommet::SOMCopieTabArcs(CArc** ppArcArg, unsigned int uiArgNbNew, unsign
 }
 
 
+bool CSommet::SOMIsArcExist(CSommet * pArgDestination)
+{
+	return false;
+}
+
 void CSommet::SOMAjouterArc(CSommet* pArgDestination) {
-	
+	try {
+		if (SOMIsArcExist(pArgDestination)) {
+			throw new CException((char*)ERROR_ARC_EXIST);
+		}
+		//TODO : reste du code
+	}
+	catch (CException EXClevee) {
+		std::cout << EXClevee.EXCLireErreur();
+	}
+}
+
+void CSommet::SOMSupprimerArc(CSommet * pArgDestination)
+{
+	try {
+		if (SOMIsArcExist(pArgDestination)) {
+			throw new CException((char*)ERROR_ARC_NOT_EXIST);
+		}
+		//TODO : reste du code
+	}
+	catch (CException EXClevee) {
+		std::cout << EXClevee.EXCLireErreur();
+	}
 }
 
 
