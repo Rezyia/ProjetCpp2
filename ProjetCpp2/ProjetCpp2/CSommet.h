@@ -10,6 +10,8 @@ private:
 
 public:
 	CSommet();
+	CSommet(CSommet* SOMarg);
+	CSommet(unsigned int uiArg);
 
 	bool SOMIsEmptyArrivants();
 	bool SOMIsEmptyPartants();
