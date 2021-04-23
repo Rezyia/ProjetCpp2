@@ -5,7 +5,7 @@ Projet Tutoré 2 Cpp Polytech Tours DI3
 Contient le fichier exécutable ainsi que des fichiers d'exemple de graphes.
 Avec cmd : 
 ```
-ProjetCpp2.exe <Fichier1> [<Fichier2> <Fichier3> <Fichier4> ... <FichierN>]
+ProjetCpp2.exe <Fichier1>
 ```
 Les fichiers utilisés doivent respecter le format suivant :
 
