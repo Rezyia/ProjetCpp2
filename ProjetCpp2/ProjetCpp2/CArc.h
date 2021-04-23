@@ -12,12 +12,12 @@ public:
 
 
 	// Getter
-	unsigned int SOMGetNumero() {
+	unsigned int ARCGetNumero() {
 		return uiARCDestination;
 	}
 
 	// Setter
-	void SOMSetNumero(unsigned int uiArgNumDest) {
+	void ARCSetNumero(unsigned int uiArgNumDest) {
 		uiARCDestination = uiArgNumDest;
 	}
 };
