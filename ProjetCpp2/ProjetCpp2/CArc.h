@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 class CArc
 {
 private:
@@ -6,10 +7,16 @@ private:
 
 public:
 	CArc();
-	CArc(unsigned int uiArgDest);
+	CArc(unsigned int uiArgDest) {
+		uiARCDestination = uiArgDest;
+	}
+	CArc(CArc* ARCarg) {
+		uiARCDestination = ARCarg->ARCGetNumero();
+	}
 
-	void ARCAfficher();
-
+	void ARCAfficher() {
+		std::cout << "Arc vers " + uiARCDestination;
+	}
 
 	// Getter
 	unsigned int ARCGetNumero() {
