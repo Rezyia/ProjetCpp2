@@ -26,12 +26,16 @@ public:
 	~CSommet();
 
 
-	bool SOMIsEmptyArrivants();
-	bool SOMIsEmptyPartants();
+	bool SOMIsEmptyArrivants() {
+		return uiSOMNbArrivants == 0;
+	}
+	bool SOMIsEmptyPartants() {
+		return uiSOMNbPartants == 0;
+	}
 	bool SOMIsArcExist(CSommet* pArgDestination); //Vérifie si un arc vers la destination existe
 	void SOMAjouterArc(CSommet* pArgDestination); // Ajouter l'arc du sommet appelé vers la destination.
 	void SOMSupprimerArc(CSommet* pArgDestination); // Supprimer l'arc du sommet appelé vers la destination.
-	CArc* SOMGetArc(CSommet* pArgDestination); // Retoure l'arc du sommet vers la destination passée en paramètre.
+	CArc* SOMGetArc(CSommet* pArgDestination); // Retoure le pointeur sur l'arc du sommet vers la destination passée en paramètre.
 
 
 	// Getter : retourne le numéro du sommet
