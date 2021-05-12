@@ -88,6 +88,20 @@ public:
 		return uiSOMNbArrivants;
 	}
 
+	// Getter : retourne le nombre d'arcs arrivants au sommet
+	CArc** SOMGetArrivants() {
+		return ppArcSomArrivants;
+	}
+
+	CArc** SOMGetPartants() {
+		return ppArcSomPartants;
+	}
+
+
+	void SOMIncrementNbArrivants() {
+		uiSOMNbArrivants++;
+	}
+
 
 	/* Associe le numéro du sommet avec l'argument passé en paramètre
 		Entrée :
@@ -96,5 +110,9 @@ public:
 	void SOMSetNumero(unsigned int uiArgNum) {
 		uiSOMNumero = uiArgNum;
 	}
-};
 
+
+	void SOMSetArrivant(unsigned int uiArgNum, CArc* newArc) {
+		ppArcSomArrivants[uiArgNum] = newArc;
+	}
+};

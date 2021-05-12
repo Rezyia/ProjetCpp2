@@ -20,11 +20,10 @@ void CGraphe::GPHAjouterSommet(CSommet * pArgSommet)
 		if (GPHSommetExists(pArgSommet)) {
 			throw new CException((char*)ERROR_SOMMET_EXIST);
 		}
-		//TODO : reste du code
 
-		GPHDispSommets();
+		//GPHDispSommets();
 
-		CSommet** ppNewSommets = (CSommet**)malloc(sizeof(CSommet*));
+		CSommet** ppNewSommets = (CSommet**) malloc(sizeof(CSommet*) * uiGPHNbSommets + 1);
 		for (unsigned int uiIndice = 0; uiIndice < uiGPHNbSommets + 1; uiIndice++) { // Ajout nouvel element -> +1
 			ppNewSommets[uiIndice] = (CSommet*) malloc(sizeof(CSommet));
 		}

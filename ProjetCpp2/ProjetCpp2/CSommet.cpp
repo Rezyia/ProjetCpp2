@@ -85,9 +85,13 @@ void CSommet::SOMAjouterArc(CSommet* pArgDestination) {
 			throw new CException((char*)ERROR_ARC_EXIST);
 		}
 		//TODO : reste du code
-		pArgDestination->uiSOMNbArrivants++;
-		realloc(pArgDestination->ppArcSomArrivants, pArgDestination->uiSOMNbArrivants);
-		pArgDestination->ppArcSomArrivants[uiSOMNbArrivants] = new CArc(this->uiSOMNumero);
+		//pArgDestination->uiSOMNbArrivants++;
+		pArgDestination->SOMIncrementNbArrivants();
+
+		//realloc(pArgDestination->ppArcSomArrivants, pArgDestination->uiSOMNbArrivants);
+		realloc(pArgDestination->SOMGetArrivants(), pArgDestination->SOMGetNbArrivants());
+		//pArgDestination->ppArcSomArrivants[pArgDestination->uiSOMNbArrivants] = new CArc(uiSOMNumero);
+		pArgDestination->SOMSetArrivant(pArgDestination->SOMGetNbArrivants(), new CArc(uiSOMNumero));
 
 		uiSOMNbPartants++;
 		realloc(ppArcSomPartants, uiSOMNbPartants);
