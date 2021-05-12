@@ -39,7 +39,6 @@ void CGraphe::GPHAjouterSommet(CSommet * pArgSommet)
 		ppNewSommets[uiGPHNbSommets + 1] = pArgSommet;
 
 		std::cout << "test 13" << std::endl;
-		GPHFreeSommets();
 		ppSomGPHSommets = ppNewSommets;
 		uiGPHNbSommets++;
 	}
