@@ -24,21 +24,21 @@ void CGraphe::GPHAjouterSommet(CSommet * pArgSommet)
 
 		GPHDispSommets();
 
-		std::cout << "test 10" << std::endl;
 		CSommet** ppNewSommets = (CSommet**)malloc(sizeof(CSommet*));
 		for (unsigned int uiIndice = 0; uiIndice < uiGPHNbSommets + 1; uiIndice++) { // Ajout nouvel element -> +1
 			ppNewSommets[uiIndice] = (CSommet*) malloc(sizeof(CSommet));
 		}
 
-		std::cout << "test 11" << std::endl;
-		for (unsigned int uiIndice = 0; uiIndice < uiGPHNbSommets; uiIndice++) {
-			ppNewSommets[uiIndice] = ppSomGPHSommets[uiIndice];
+		if (ppSomGPHSommets != NULL) {
+			for (unsigned int uiIndice = 0; uiIndice < uiGPHNbSommets; uiIndice++) {
+				ppNewSommets[uiIndice] = ppSomGPHSommets[uiIndice];
+			}
 		}
+		
 
-		std::cout << "test 12" << std::endl;
-		ppNewSommets[uiGPHNbSommets + 1] = pArgSommet;
+		ppNewSommets[uiGPHNbSommets] = pArgSommet;
 
-		std::cout << "test 13" << std::endl;
+		//GPHFreeSommets();
 		ppSomGPHSommets = ppNewSommets;
 		uiGPHNbSommets++;
 	}

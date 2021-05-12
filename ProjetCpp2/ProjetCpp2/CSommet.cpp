@@ -17,10 +17,8 @@ CSommet::CSommet(unsigned int uiArg){
 	uiSOMNumero = uiArg;
 	uiSOMNbArrivants = 0;
 	uiSOMNbPartants = 0;
-	ppArcSomArrivants = (CArc**)malloc(sizeof(CArc*) * 0);
-	ppArcSomPartants = (CArc**)malloc(sizeof(CArc*) * 0);
-	std::cout << "test 20" << std::endl;
-	std::cout << SOMGetNumero();
+	ppArcSomArrivants = NULL;
+	ppArcSomPartants = NULL;
 }
 
 

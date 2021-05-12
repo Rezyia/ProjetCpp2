@@ -10,18 +10,25 @@ int main()
 
 	std::cout << "CGraphe créé" << std::endl;
 
-	graphe.GPHAjouterSommet(new CSommet(1));
-	graphe.GPHAjouterSommet(new CSommet(2));
-	graphe.GPHAjouterSommet(new CSommet(3));
-	graphe.GPHAjouterSommet(new CSommet(4));
-	graphe.GPHAjouterSommet(new CSommet(5));
-	graphe.GPHAjouterSommet(new CSommet(6));
-	graphe.GPHAjouterSommet(new CSommet(7));
-	graphe.GPHAjouterSommet(new CSommet(8));
+	CSommet* s1 = new CSommet(1);
+	graphe.GPHAjouterSommet(s1);
+	CSommet* s2 = new CSommet(2);
+	graphe.GPHAjouterSommet(s2);
+	CSommet* s3 = new CSommet(3);
+	graphe.GPHAjouterSommet(s3);
+	CSommet* s4 = new CSommet(4);
+	graphe.GPHAjouterSommet(s4);
+	CSommet* s5 = new CSommet(5);
+	graphe.GPHAjouterSommet(s5);
+	CSommet* s6 = new CSommet(6);
+	graphe.GPHAjouterSommet(s6);
+	CSommet* s7 = new CSommet(7);
+	graphe.GPHAjouterSommet(s7);
+	CSommet* s8 = new CSommet(8);
+	graphe.GPHAjouterSommet(s8);
 
 	std::cout << "Sommets créés" << std::endl;
 
-	std::cout << graphe.GPHGetSommet(0)->SOMGetNumero() << std::endl; 
 
 	graphe.GPHGetSommet(0)->SOMAjouterArc(graphe.GPHGetSommet(1));
 	std::cout << "test1000" << std::endl;
