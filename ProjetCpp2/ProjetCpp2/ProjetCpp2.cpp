@@ -6,7 +6,38 @@
 
 int main()
 {
-    
+	CGraphe graphe = new CGraphe();
+
+	std::cout << "CGraphe créé" << std::endl;
+
+	graphe.GPHAjouterSommet(new CSommet(1));
+	graphe.GPHAjouterSommet(new CSommet(2));
+	graphe.GPHAjouterSommet(new CSommet(3));
+	graphe.GPHAjouterSommet(new CSommet(4));
+	graphe.GPHAjouterSommet(new CSommet(5));
+	graphe.GPHAjouterSommet(new CSommet(6));
+	graphe.GPHAjouterSommet(new CSommet(7));
+	graphe.GPHAjouterSommet(new CSommet(8));
+
+	std::cout << "Sommets créés" << std::endl;
+
+	graphe.GPHGetSommet(0)->SOMAjouterArc(graphe.GPHGetSommet(1));
+	graphe.GPHGetSommet(0)->SOMAjouterArc(graphe.GPHGetSommet(2));
+	graphe.GPHGetSommet(0)->SOMAjouterArc(graphe.GPHGetSommet(3));
+	graphe.GPHGetSommet(0)->SOMAjouterArc(graphe.GPHGetSommet(4));
+	graphe.GPHGetSommet(1)->SOMAjouterArc(graphe.GPHGetSommet(5));
+	graphe.GPHGetSommet(2)->SOMAjouterArc(graphe.GPHGetSommet(5));
+	graphe.GPHGetSommet(2)->SOMAjouterArc(graphe.GPHGetSommet(6));
+	graphe.GPHGetSommet(3)->SOMAjouterArc(graphe.GPHGetSommet(5));
+	graphe.GPHGetSommet(3)->SOMAjouterArc(graphe.GPHGetSommet(6));
+	graphe.GPHGetSommet(4)->SOMAjouterArc(graphe.GPHGetSommet(6));
+	graphe.GPHGetSommet(5)->SOMAjouterArc(graphe.GPHGetSommet(7));
+	graphe.GPHGetSommet(6)->SOMAjouterArc(graphe.GPHGetSommet(7));
+
+	std::cout << "Arcs créés" << std::endl;
+
+	std::cout << "Affichage du graphe :" << std::endl;
+	graphe.GPHAfficher();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

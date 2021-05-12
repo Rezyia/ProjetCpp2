@@ -78,12 +78,12 @@ public:
 		return uiSOMNumero;
 	}
 
-	// Getter : retourne le nombre d'arcs partants
+	// Getter : retourne le nombre d'arcs partants du sommet
 	unsigned int SOMGetNbPartants() {
 		return uiSOMNbPartants;
 	}
 
-	// Getter : retourne le nombre d'arcs arrivants
+	// Getter : retourne le nombre d'arcs arrivants au sommet
 	unsigned int SOMGetNbArrivants() {
 		return uiSOMNbArrivants;
 	}

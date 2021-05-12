@@ -14,5 +14,11 @@ public:
 	void GPHSupprimerSommet(CSommet* pArgSommet);
 	bool GPHSommetExists(CSommet* pArgSommet);
 	void GPHAfficher();
+
+
+	// Getter : retourne le pointeur CSommet d'indice uiIndice
+	CSommet* GPHGetSommet(unsigned int uiIndice) {
+		return ppSomGPHSommets[uiIndice];
+	}
 };
 

@@ -75,12 +75,16 @@ bool CSommet::SOMIsArcExist(CSommet * pArgDestination)
 	return false;
 }
 
+
 void CSommet::SOMAjouterArc(CSommet* pArgDestination) {
+	std::cout << "test0" << std::endl;
+
 	try {
 		if (SOMIsArcExist(pArgDestination)) {
 			throw new CException((char*)ERROR_ARC_EXIST);
 		}
 		//TODO : reste du code
+		std::cout << "test1" << std::endl;
 	}
 	catch (CException EXClevee) {
 		std::cout << EXClevee.EXCLireErreur();
