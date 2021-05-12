@@ -72,19 +72,27 @@ CArc** CSommet::SOMCopieTabArcs(CArc** ppArcArg, unsigned int uiArgNbNew, unsign
 
 bool CSommet::SOMIsArcExist(CSommet * pArgDestination)
 {
+	//TODO : le code
 	return false;
 }
 
 
 void CSommet::SOMAjouterArc(CSommet* pArgDestination) {
-	std::cout << "test0" << std::endl;
+	std::cout << "testAjoutArc - en cours..." << std::endl;
 
 	try {
 		if (SOMIsArcExist(pArgDestination)) {
 			throw new CException((char*)ERROR_ARC_EXIST);
 		}
 		//TODO : reste du code
-		std::cout << "test1" << std::endl;
+		pArgDestination->uiSOMNbArrivants++;
+		realloc(pArgDestination->ppArcSomArrivants, pArgDestination->uiSOMNbArrivants);
+		pArgDestination->ppArcSomArrivants[uiSOMNbArrivants] = new CArc(this->uiSOMNumero);
+
+		uiSOMNbPartants++;
+		realloc(ppArcSomPartants, uiSOMNbPartants);
+		ppArcSomPartants[uiSOMNbPartants] = new CArc(pArgDestination->uiSOMNumero);
+		std::cout << "testAjoutArc - fait" << std::endl;
 	}
 	catch (CException EXClevee) {
 		std::cout << EXClevee.EXCLireErreur();
@@ -94,7 +102,7 @@ void CSommet::SOMAjouterArc(CSommet* pArgDestination) {
 void CSommet::SOMSupprimerArc(CSommet * pArgDestination)
 {
 	try {
-		if (SOMIsArcExist(pArgDestination)) {
+		if (!SOMIsArcExist(pArgDestination)) {
 			throw new CException((char*)ERROR_ARC_NOT_EXIST);
 		}
 		//TODO : reste du code
