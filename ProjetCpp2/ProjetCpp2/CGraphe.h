@@ -15,9 +15,14 @@ public:
 	bool GPHSommetExists(CSommet* pArgSommet);
 	void GPHAfficher();
 
+	void GPHFreeSommets();
+	void GPHDispSommets();
+
+
 
 	// Getter : retourne le pointeur CSommet d'indice uiIndice
 	CSommet* GPHGetSommet(unsigned int uiIndice) {
+		std::cout << "test-1" << std::endl;
 		return ppSomGPHSommets[uiIndice];
 	}
 };
