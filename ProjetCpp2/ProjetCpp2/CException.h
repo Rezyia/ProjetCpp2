@@ -7,7 +7,9 @@ private:
 	char* pcErreur;
 public:
 	CException(char* pcArgErr){
-		strcpy_s(pcErreur, sizeof(pcArgErr), pcArgErr);
+		//strcpy_s(pcErreur, sizeof(pcArgErr), pcArgErr);
+		pcErreur[strlen(pcArgErr) + 1];
+		strcpy_s(pcErreur, sizeof pcErreur, pcArgErr);
 	}
 
 	CException(CException* EXCcopie) {
