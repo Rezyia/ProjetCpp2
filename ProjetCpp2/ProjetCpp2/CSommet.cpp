@@ -133,7 +133,7 @@ void CSommet::SOMAjouterArc(CSommet* pArgDestination) {
 	}
 }
 
-void CSommet::SOMSupprimerArc(CSommet * pArgDestination)
+void CSommet::SOMSupprimerArcPartant(CSommet * pArgDestination)
 {
 	std::cout << "testSupprArc - en cours..." << std::endl;
 	try {
@@ -147,19 +147,35 @@ void CSommet::SOMSupprimerArc(CSommet * pArgDestination)
 			ppArcSomPartants[uiBoucle] = ppArcSomPartants[uiBoucle + 1];
 		}
 		uiSOMNbPartants--;
-		realloc(ppArcSomPartants, uiSOMNbPartants*sizeof(CArc));
-		
-		//Suppresion dans pArcDestination->ppArcSomArrivant
-		for (uiBoucle = pArgDestination->SOMIsArcArrivantExist(this); uiBoucle < pArgDestination->SOMGetNbArrivants()- 1; uiBoucle++) {
-			pArgDestination->ppArcSomArrivants[uiBoucle] = pArgDestination->ppArcSomArrivants[uiBoucle + 1];
-		}
-		pArgDestination->uiSOMNbArrivants--;
-		realloc(pArgDestination->SOMGetArrivants(), pArgDestination->SOMGetNbArrivants()*sizeof(CArc));
+		realloc(ppArcSomPartants, uiSOMNbPartants*sizeof(CArc*));
 
 		std::cout << "testSupprArc - fait" << std::endl;
 	}
 	catch (CException EXClevee) {
-		std::cout << EXClevee.EXCLireErreur();
+		std::cout << EXClevee.EXCLireErreur() << std::endl;
+	}
+}
+
+void CSommet::SOMSupprimerArcArrivant(CSommet * pArgDepart)
+{
+	std::cout << "testSupprArc - en cours..." << std::endl;
+	try {
+		int iPosArc = SOMIsArcArrivantExist(pArgDepart);
+		if (iPosArc == -1) {
+			throw new CException((char*)ERROR_ARC_NOT_EXIST);
+		}
+		//Suppresion dans ppArcSomPartant
+		unsigned int uiBoucle;
+		for (uiBoucle = iPosArc; uiBoucle < uiSOMNbArrivants - 1; uiBoucle++) {
+			ppArcSomArrivants[uiBoucle] = ppArcSomArrivants[uiBoucle + 1];
+		}
+		uiSOMNbArrivants--;
+		realloc(ppArcSomArrivants, uiSOMNbArrivants * sizeof(CArc*));
+
+		std::cout << "testSupprArc - fait" << std::endl;
+	}
+	catch (CException EXClevee) {
+		std::cout << EXClevee.EXCLireErreur() << std::endl;
 	}
 }
 
