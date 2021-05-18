@@ -15,6 +15,9 @@ public:
 	void GPHAjouterSommet(CSommet* pArgSommet);
 	void GPHSupprimerSommet(CSommet* pArgSommet);
 	bool GPHSommetExists(CSommet* pArgSommet);
+
+	void GPHAjouterArc(CSommet* pArgSommetSource, CSommet* pArgSommetDestination);
+
 	void GPHAfficher();
 
 	void GPHFreeSommets();

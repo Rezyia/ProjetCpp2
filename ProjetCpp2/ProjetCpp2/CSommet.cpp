@@ -17,8 +17,8 @@ CSommet::CSommet(unsigned int uiArg){
 	uiSOMNumero = uiArg;
 	uiSOMNbArrivants = 0;
 	uiSOMNbPartants = 0;
-	ppArcSomArrivants = NULL;
-	ppArcSomPartants = NULL;
+	ppArcSomArrivants = (CArc**)malloc(sizeof(CArc*));
+	ppArcSomPartants = (CArc**)malloc(sizeof(CArc*));
 }
 
 
@@ -74,7 +74,7 @@ int CSommet::SOMIsArcPartantExist(CSommet * pArgDestination)
 {
 	bool bTrouve = false;
 	unsigned int uiBoucle = 0;
-	while (!bTrouve && uiBoucle != uiSOMNbPartants) {
+	while (!bTrouve && uiBoucle < uiSOMNbPartants) {
 		if (ppArcSomPartants[uiBoucle]->ARCGetNumero() == pArgDestination->SOMGetNumero()) {
 			bTrouve = true;
 		}
@@ -106,7 +106,20 @@ int CSommet::SOMIsArcArrivantExist(CSommet * pArgDepart)
 	return uiBoucle;
 }
 
-void CSommet::SOMAjouterArc(CSommet* pArgDestination) {
+void CSommet::SOMAjouterPartant(CSommet* pArgSommet) {
+	realloc(ppArcSomPartants, (uiSOMNbPartants + 1) * sizeof(CArc*));
+	ppArcSomPartants[uiSOMNbPartants] = new CArc(uiSOMNumero);
+	uiSOMNbPartants++;
+}
+
+void CSommet::SOMAjouterArrivant(CSommet* pArgSommet) {
+	realloc(ppArcSomArrivants, (uiSOMNbArrivants + 1) * sizeof(CArc*));
+	ppArcSomArrivants[uiSOMNbArrivants] = new CArc(pArgSommet->uiSOMNumero);
+	uiSOMNbArrivants++;
+}
+
+
+/*void CSommet::SOMAjouterArc(CSommet* pArgDestination) {
 	std::cout << "testAjoutArc - en cours..." << std::endl;
 
 	try {
@@ -116,22 +129,27 @@ void CSommet::SOMAjouterArc(CSommet* pArgDestination) {
 
 		//TODO : reste du code
 		//pArgDestination->uiSOMNbArrivants++;
-		pArgDestination->SOMIncrementNbArrivants();
 
 		//realloc(pArgDestination->ppArcSomArrivants, pArgDestination->uiSOMNbArrivants);
-		realloc(pArgDestination->SOMGetArrivants(), pArgDestination->SOMGetNbArrivants() * sizeof(CArc*));
-		//pArgDestination->ppArcSomArrivants[pArgDestination->uiSOMNbArrivants] = new CArc(uiSOMNumero);
-		pArgDestination->SOMSetArrivant(pArgDestination->SOMGetNbArrivants(), new CArc(uiSOMNumero));
+		realloc(pArgDestination->ppArcSomArrivants, (pArgDestination->SOMGetNbArrivants()+1) * sizeof(CArc*));
 
-		uiSOMNbPartants++;
-		realloc(ppArcSomPartants, uiSOMNbPartants * sizeof(CArc*));
+		//pArgDestination->SOMGetArrivants()[pArgDestination->SOMGetNbArrivants()] = (CArc*)malloc(sizeof CArc);
+		pArgDestination->SOMGetArrivants()[pArgDestination->SOMGetNbArrivants()] = new CArc(pArgDestination->uiSOMNumero);
+		pArgDestination->SOMIncrementNbArrivants();
+
+		//pArgDestination->SOMSetArrivant(pArgDestination->SOMGetNbArrivants(), new CArc(uiSOMNumero));
+		realloc(ppArcSomPartants, (uiSOMNbPartants+1) * sizeof(CArc*));
+
+		//ppArcSomPartants[uiSOMNbPartants] = (CArc*)malloc(sizeof CArc);
 		ppArcSomPartants[uiSOMNbPartants] = new CArc(pArgDestination->uiSOMNumero);
+		uiSOMNbPartants++;
+
 		std::cout << "testAjoutArc - fait" << std::endl;
 	}
 	catch (CException EXClevee) {
 		std::cout << EXClevee.EXCLireErreur();
 	}
-}
+}*/
 
 void CSommet::SOMSupprimerArc(CSommet * pArgDestination)
 {
@@ -147,14 +165,14 @@ void CSommet::SOMSupprimerArc(CSommet * pArgDestination)
 			ppArcSomPartants[uiBoucle] = ppArcSomPartants[uiBoucle + 1];
 		}
 		uiSOMNbPartants--;
-		realloc(ppArcSomPartants, uiSOMNbPartants*sizeof(CArc));
+		realloc(ppArcSomPartants, uiSOMNbPartants*sizeof(CArc*));
 		
 		//Suppresion dans pArcDestination->ppArcSomArrivant
 		for (uiBoucle = pArgDestination->SOMIsArcArrivantExist(this); uiBoucle < pArgDestination->SOMGetNbArrivants()- 1; uiBoucle++) {
 			pArgDestination->ppArcSomArrivants[uiBoucle] = pArgDestination->ppArcSomArrivants[uiBoucle + 1];
 		}
 		pArgDestination->uiSOMNbArrivants--;
-		realloc(pArgDestination->SOMGetArrivants(), pArgDestination->SOMGetNbArrivants()*sizeof(CArc));
+		realloc(pArgDestination->SOMGetArrivants(), pArgDestination->SOMGetNbArrivants()*sizeof(CArc*));
 
 		std::cout << "testSupprArc - fait" << std::endl;
 	}
