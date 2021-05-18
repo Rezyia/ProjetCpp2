@@ -20,6 +20,11 @@ public:
 	void GPHFreeSommets();
 	void GPHDispSommets();
 
+	void GPHSupprimerArc(CSommet* pArgDepart, CSommet* pArgDestination) {
+		pArgDepart->SOMSupprimerArcPartant(pArgDestination);
+		pArgDestination->SOMSupprimerArcArrivant(pArgDepart);
+	}
+
 
 
 	// Getter : retourne le pointeur CSommet d'indice uiIndice
