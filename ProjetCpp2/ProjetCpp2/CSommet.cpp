@@ -114,11 +114,24 @@ void CSommet::SOMAjouterArc(CSommet* pArgDestination) {
 
 void CSommet::SOMSupprimerArc(CSommet * pArgDestination)
 {
+	std::cout << "testSupprArc - en cours..." << std::endl;
 	try {
 		if (!SOMIsArcExist(pArgDestination)) {
 			throw new CException((char*)ERROR_ARC_NOT_EXIST);
 		}
 		//TODO : reste du code
+		//pArgDestination->uiSOMNbArrivants++;
+		pArgDestination->SOMIncrementNbArrivants();
+
+		//realloc(pArgDestination->ppArcSomArrivants, pArgDestination->uiSOMNbArrivants);
+		realloc(pArgDestination->SOMGetArrivants(), pArgDestination->SOMGetNbArrivants());
+		//pArgDestination->ppArcSomArrivants[pArgDestination->uiSOMNbArrivants] = new CArc(uiSOMNumero);
+		pArgDestination->SOMSetArrivant(pArgDestination->SOMGetNbArrivants(), new CArc(uiSOMNumero));
+
+		uiSOMNbPartants++;
+		realloc(ppArcSomPartants, uiSOMNbPartants);
+		ppArcSomPartants[uiSOMNbPartants] = new CArc(pArgDestination->uiSOMNumero);
+		std::cout << "testSupprArc - fait" << std::endl;
 	}
 	catch (CException EXClevee) {
 		std::cout << EXClevee.EXCLireErreur();
