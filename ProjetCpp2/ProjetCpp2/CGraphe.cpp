@@ -14,6 +14,14 @@ CGraphe::CGraphe(CGraphe * GPHarg)
 {
 }
 
+CGraphe::~CGraphe() {
+	for (unsigned int uiDealloc = 0; uiDealloc < uiGPHNbSommets; uiDealloc++) {
+
+	}
+}
+
+
+
 void CGraphe::GPHAjouterSommet(CSommet * pArgSommet)
 {
 	try {

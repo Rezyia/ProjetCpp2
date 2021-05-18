@@ -10,6 +10,7 @@ private:
 public:
 	CGraphe();
 	CGraphe(CGraphe* GPHarg);
+	~CGraphe();
 
 	void GPHAjouterSommet(CSommet* pArgSommet);
 	void GPHSupprimerSommet(CSommet* pArgSommet);

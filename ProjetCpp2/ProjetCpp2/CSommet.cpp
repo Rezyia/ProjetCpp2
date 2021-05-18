@@ -70,20 +70,19 @@ CArc** CSommet::SOMCopieTabArcs(CArc** ppArcArg, unsigned int uiArgNbNew, unsign
 }
 
 
-bool CSommet::SOMIsArcExist(CSommet * pArgDestination)
+int CSommet::SOMIsArcExist(CSommet * pArgDestination)
 {
-	//TODO : le code
-	bool bTrouve = false;
+	int iTrouve = -1;
 	unsigned int uiBoucle = 0;
-	while (!bTrouve && uiBoucle != uiSOMNbPartants) {
+	while (iTrouve == -1 && uiBoucle != uiSOMNbPartants) {
 		if (ppArcSomPartants[uiBoucle]->ARCGetNumero() == pArgDestination->SOMGetNumero()) {
-			bTrouve = true;
+			iTrouve = true;
 		}
 		else {
 			uiBoucle++;
 		}
 	}
-	return bTrouve;
+	return iTrouve;
 }
 
 
