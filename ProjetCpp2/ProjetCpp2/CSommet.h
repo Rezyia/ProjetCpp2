@@ -32,7 +32,8 @@ public:
 	bool SOMIsEmptyPartants() {
 		return uiSOMNbPartants == 0;
 	}
-	int SOMIsArcExist(CSommet* pArgDestination); //Vérifie si un arc vers la destination existe
+	int SOMIsArcPartantExist(CSommet* pArgDestination); //Vérifie si un arc vers la destination existe
+	int SOMIsArcArrivantExist(CSommet* pArgDepart); //Vérifie si un arc partant du départ existe
 	void SOMAjouterArc(CSommet* pArgDestination); // Ajouter l'arc du sommet appelé vers la destination.
 	void SOMSupprimerArc(CSommet* pArgDestination); // Supprimer l'arc du sommet appelé vers la destination.
 	
