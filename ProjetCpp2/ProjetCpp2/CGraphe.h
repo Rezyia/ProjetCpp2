@@ -23,6 +23,8 @@ public:
 	void GPHFreeSommets();
 	void GPHDispSommets();
 
+	CSommet * GPHGetSommet(unsigned int uiIndice);
+
 	void GPHSupprimerArc(CSommet* pArgDepart, CSommet* pArgDestination) {
 		pArgDepart->SOMSupprimerArcPartant(pArgDestination);
 		pArgDestination->SOMSupprimerArcArrivant(pArgDepart);
@@ -30,9 +32,6 @@ public:
 
 
 
-	// Getter : retourne le pointeur CSommet d'indice uiIndice
-	CSommet* GPHGetSommet(unsigned int uiIndice) {
-		return ppSomGPHSommets[uiIndice];
-	}
+	
 };
 
