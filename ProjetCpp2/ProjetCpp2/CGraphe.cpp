@@ -97,6 +97,9 @@ int CGraphe::GPHIsSommetExists(CSommet * pArgSommet)
 
 void CGraphe::GPHAfficher()
 {
+	for (unsigned int uiBoucle = 0; uiBoucle < uiGPHNbSommets; uiBoucle++) {
+		ppSomGPHSommets[uiBoucle]->SOMAfficher();
+	}
 }
 
 

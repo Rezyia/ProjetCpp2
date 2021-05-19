@@ -123,4 +123,6 @@ public:
 	void SOMSetArrivant(unsigned int uiArgNum, CArc* newArc) {
 		ppArcSomArrivants[uiArgNum] = newArc;
 	}
+
+	void SOMAfficher();
 };
