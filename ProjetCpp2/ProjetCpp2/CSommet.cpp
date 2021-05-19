@@ -71,11 +71,17 @@ CArc** CSommet::SOMCopieTabArcs(CArc** ppArcArg, unsigned int uiArgNbNew, unsign
 
 void CSommet::SOMAfficher()
 {
-	std::cout << "Sommet numero "+SOMGetNumero() << std::endl;
-	std::cout << "Arc partant depuis ce sommet :" << std::endl;
-	for (unsigned int uiBoucle = 0; uiBoucle < uiSOMNbPartants; uiBoucle++) {
-		std::cout << "\tArc vers sommet numero " << ppArcSomPartants[uiBoucle]->ARCGetNumero() << std::endl;
+	std::cout << "Sommet numero " << SOMGetNumero() << std::endl;
+	if (SOMGetNbPartants() == 0) {
+		std::cout << "Pas d'arc partant" << std::endl;
 	}
+	else {
+		std::cout << "Arc partant depuis ce sommet :" << std::endl;
+		for (unsigned int uiBoucle = 0; uiBoucle < uiSOMNbPartants; uiBoucle++) {
+			std::cout << "\tArc vers sommet numero " << ppArcSomPartants[uiBoucle]->ARCGetNumero() << std::endl;
+		}
+	}
+	
 }
 
 

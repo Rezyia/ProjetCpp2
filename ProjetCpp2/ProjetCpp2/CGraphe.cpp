@@ -15,7 +15,7 @@ CGraphe::CGraphe(CGraphe * GPHarg)
 	unsigned int uiBoucle = 0;
 	//Ajout des Sommets
 	for (uiBoucle; uiBoucle < GPHarg->uiGPHNbSommets; uiBoucle++) {
-		GPHAjouterSommet(new CSommet(GPHarg->ppSomGPHSommets[uiBoucle]->SOMGetNumero));
+		GPHAjouterSommet(new CSommet(GPHarg->ppSomGPHSommets[uiBoucle]->SOMGetNumero()));
 	}
 	//Ajout des Arcs
 	for (uiBoucle = 0; uiBoucle < GPHarg->uiGPHNbSommets; uiBoucle++) {
@@ -31,7 +31,7 @@ CGraphe::CGraphe(CGraphe * GPHarg)
 	}
 }
 
-CGraphe::~CGraphe() {
+CGraphe::~CGraphe() { // a corriger
 	for (unsigned int uiDealloc = 0; uiDealloc < uiGPHNbSommets; uiDealloc++) {
 		delete ppSomGPHSommets[uiDealloc];
 	}
@@ -149,4 +149,5 @@ CSommet* CGraphe::GPHGetSommet(unsigned int uiIndice) {
 	catch (CException EXClevee) {
 		std::cout << EXClevee.EXCLireErreur();
 	}
+	return nullptr;
 }
