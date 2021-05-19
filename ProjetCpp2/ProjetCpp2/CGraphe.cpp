@@ -21,8 +21,8 @@ CGraphe::~CGraphe() {
 }
 
 void CGraphe::GPHAjouterArc(CSommet* pArgSommetSource, CSommet* pArgSommetDestination) {
-	pArgSommetSource->SOMAjouterPartant(pArgSommetSource);
-	pArgSommetDestination->SOMAjouterArrivant(pArgSommetDestination);
+	pArgSommetSource->SOMAjouterArcPartant(pArgSommetSource);
+	pArgSommetDestination->SOMAjouterArcArrivant(pArgSommetDestination);
 }
 
 void CGraphe::GPHAjouterSommet(CSommet * pArgSommet)
