@@ -28,7 +28,7 @@ void CGraphe::GPHAjouterArc(CSommet* pArgSommetSource, CSommet* pArgSommetDestin
 void CGraphe::GPHAjouterSommet(CSommet * pArgSommet)
 {
 	try {
-		if (GPHSommetExists(pArgSommet)) {
+		if (GPHIsSommetExists(pArgSommet) != -1) {
 			throw new CException((char*)ERROR_SOMMET_EXIST);
 		}
 
@@ -60,19 +60,38 @@ void CGraphe::GPHAjouterSommet(CSommet * pArgSommet)
 void CGraphe::GPHSupprimerSommet(CSommet * pArgSommet)
 {
 	try {
-		if (!GPHSommetExists(pArgSommet)) {
+		int iPosSommet = GPHIsSommetExists(pArgSommet);
+		if (iPosSommet == -1) {
 			throw new CException((char*)ERROR_SOMMET_NOT_EXIST);
 		}
-		//TODO : reste du code
+		unsigned int uiBoucle;
+		for (uiBoucle = iPosSommet; uiBoucle < uiGPHNbSommets - 1; uiBoucle++) {
+			ppSomGPHSommets[uiBoucle] = ppSomGPHSommets[uiBoucle+1];
+		}
+		uiGPHNbSommets--;
+		realloc(ppSomGPHSommets, uiGPHNbSommets * sizeof(CSommet*));
 	}
 	catch (CException EXClevee) {
 		std::cout << EXClevee.EXCLireErreur();
 	}
 }
 
-bool CGraphe::GPHSommetExists(CSommet * pArgSommet)
+int CGraphe::GPHIsSommetExists(CSommet * pArgSommet)
 {
-	return false;
+	bool bTrouve = false;
+	unsigned int uiBoucle = 0;
+	while (!bTrouve && uiBoucle != uiGPHNbSommets) {
+		if (ppSomGPHSommets[uiBoucle]->SOMGetNumero() == pArgSommet->SOMGetNumero()) {
+			bTrouve = true;
+		}
+		else {
+			uiBoucle++;
+		}
+	}
+	if (!bTrouve) {
+		return -1;
+	}
+	return uiBoucle;
 }
 
 void CGraphe::GPHAfficher()
