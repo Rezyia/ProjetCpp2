@@ -8,8 +8,8 @@ CSommet::CSommet() {
 	uiSOMNumero = -1;
 	uiSOMNbArrivants = 0;
 	uiSOMNbPartants = 0;
-	ppArcSomArrivants = (CArc**) malloc(sizeof(CArc*) * 0);
-	ppArcSomPartants = (CArc**)malloc(sizeof(CArc*) * 0);
+	ppArcSomArrivants = nullptr;
+	ppArcSomPartants = nullptr;
 }
 
 
@@ -17,8 +17,8 @@ CSommet::CSommet(unsigned int uiArg){
 	uiSOMNumero = uiArg;
 	uiSOMNbArrivants = 0;
 	uiSOMNbPartants = 0;
-	ppArcSomArrivants = (CArc**)malloc(sizeof(CArc*));
-	ppArcSomPartants = (CArc**)malloc(sizeof(CArc*));
+	ppArcSomArrivants = nullptr;
+	ppArcSomPartants = nullptr;
 }
 
 
@@ -109,10 +109,19 @@ int CSommet::SOMIsArcArrivantExist(CSommet * pArgDepart)
 void CSommet::SOMAjouterArcPartant(CSommet* pArgDestination) {
 	std::cout << "testAjoutArc - en cours..." << std::endl;
 	try {
+		// Si l'arc existe deja :
 		if (SOMIsArcPartantExist(pArgDestination) != -1) {
 			throw new CException((char*)ERROR_ARC_EXIST);
 		}
-		realloc(ppArcSomPartants, (uiSOMNbPartants + 1) * sizeof(CArc*));
+
+		// Si ppArcSomPartants est vide (nullptr) -> malloc
+		if (SOMIsEmptyPartants()) {
+			ppArcSomPartants = (CArc**)malloc(sizeof(CArc*));
+		}
+		// Sinon -> realloc
+		else {
+			realloc(ppArcSomPartants, (uiSOMNbPartants + 1) * sizeof(CArc*));
+		}
 		ppArcSomPartants[uiSOMNbPartants] = new CArc(uiSOMNumero);
 		uiSOMNbPartants++;
 
@@ -129,7 +138,12 @@ void CSommet::SOMAjouterArcArrivant(CSommet* pArgDepart) {
 		if (SOMIsArcArrivantExist(pArgDepart) != -1) {
 			throw new CException((char*)ERROR_ARC_EXIST);
 		}
-		realloc(ppArcSomArrivants, (uiSOMNbArrivants + 1) * sizeof(CArc*));
+		if (SOMIsEmptyArrivants()) {
+			ppArcSomArrivants= (CArc**)malloc(sizeof(CArc*));
+		}
+		else {
+			realloc(ppArcSomArrivants, (uiSOMNbArrivants + 1) * sizeof(CArc*));
+		}
 		ppArcSomArrivants[uiSOMNbArrivants] = new CArc(pArgDepart->uiSOMNumero);
 		uiSOMNbArrivants++;
 		std::cout << "testAjoutArc - fait" << std::endl;
