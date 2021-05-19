@@ -129,7 +129,7 @@ void CSommet::SOMAjouterArcPartant(CSommet* pArgDestination) {
 		}
 		// Sinon -> realloc
 		else {
-			realloc(ppArcSomPartants, (uiSOMNbPartants + 1) * sizeof(CArc*));
+			ppArcSomPartants = (CArc**)realloc(ppArcSomPartants, (uiSOMNbPartants + 1) * sizeof(CArc*));
 		}
 		ppArcSomPartants[uiSOMNbPartants] = new CArc(pArgDestination->SOMGetNumero());
 		uiSOMNbPartants++;
@@ -151,7 +151,7 @@ void CSommet::SOMAjouterArcArrivant(CSommet* pArgDepart) {
 			ppArcSomArrivants= (CArc**)malloc(sizeof(CArc*));
 		}
 		else {
-			realloc(ppArcSomArrivants, (uiSOMNbArrivants + 1) * sizeof(CArc*));
+			ppArcSomArrivants = (CArc**)realloc(ppArcSomArrivants, (uiSOMNbArrivants + 1) * sizeof(CArc*));
 		}
 		ppArcSomArrivants[uiSOMNbArrivants] = new CArc(uiSOMNumero);
 		uiSOMNbArrivants++;
