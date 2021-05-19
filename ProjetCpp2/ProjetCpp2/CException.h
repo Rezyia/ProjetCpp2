@@ -11,8 +11,13 @@ private:
 public:
 	CException(char* pcArgErr){
 		//strcpy_s(pcErreur, sizeof(pcArgErr), pcArgErr);
+<<<<<<< HEAD
 		//strcpy_s(pcErreur, sizeof(pcErreur), pcArgErr);
 		EXCCopyString(pcArgErr);
+=======
+		pcErreur[strlen(pcArgErr) + 1];
+		strcpy_s(pcErreur, sizeof(pcErreur), pcArgErr);
+>>>>>>> 9d58b6f336a8758ca703177034fd43e90847ae78
 	}
 
 	CException(CException* EXCcopie) {
