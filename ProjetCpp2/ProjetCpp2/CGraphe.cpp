@@ -12,6 +12,23 @@ CGraphe::CGraphe()
 
 CGraphe::CGraphe(CGraphe * GPHarg)
 {
+	unsigned int uiBoucle = 0;
+	//Ajout des Sommets
+	for (uiBoucle; uiBoucle < GPHarg->uiGPHNbSommets; uiBoucle++) {
+		GPHAjouterSommet(new CSommet(GPHarg->ppSomGPHSommets[uiBoucle]->SOMGetNumero));
+	}
+	//Ajout des Arcs
+	for (uiBoucle = 0; uiBoucle < GPHarg->uiGPHNbSommets; uiBoucle++) {
+		unsigned int uiBoucleArc = 0;
+		CSommet * SomOriginal = GPHarg->ppSomGPHSommets[uiBoucle];
+		CSommet * SomDepart = ppSomGPHSommets[uiBoucle];
+		for (uiBoucleArc; uiBoucleArc < SomOriginal->SOMGetNbPartants(); uiBoucleArc++) {
+			unsigned int uiNumDest = SomOriginal->SOMGetArcPartant(uiBoucleArc)->ARCGetNumero();
+			unsigned int uiPosDest = GPHIsSommetExists(GPHarg->GPHGetSommet(uiNumDest));
+			CSommet * SomDestination = ppSomGPHSommets[uiPosDest];
+			GPHAjouterArc(SomDepart, SomDestination);
+		}
+	}
 }
 
 CGraphe::~CGraphe() {
@@ -114,5 +131,22 @@ void CGraphe::GPHDispSommets() {
 	std::cout << "Sommets : " << std::endl;
 	for (unsigned int uiIndice = 0; uiIndice < uiGPHNbSommets; uiIndice++) {
 		std::cout << " - Sommet : " << ppSomGPHSommets[uiIndice]->SOMGetNumero() << std::endl;
+	}
+}
+
+
+// Getter : retourne le pointeur CSommet d'indice uiIndice
+CSommet* CGraphe::GPHGetSommet(unsigned int uiIndice) {
+	try {
+		unsigned int uiBoucle = 0;
+		for (uiBoucle; uiBoucle < uiGPHNbSommets; uiBoucle++) {
+			if (ppSomGPHSommets[uiBoucle]->SOMGetNumero() == uiIndice) {
+				return ppSomGPHSommets[uiBoucle];
+			}
+		}
+		throw new CException((char*)ERROR_SOMMET_NOT_EXIST);
+	}
+	catch (CException EXClevee) {
+		std::cout << EXClevee.EXCLireErreur();
 	}
 }
