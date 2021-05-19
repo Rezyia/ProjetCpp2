@@ -35,13 +35,21 @@ public:
 	int SOMIsArcPartantExist(CSommet* pArgDestination); //Vérifie si un arc vers la destination existe
 	int SOMIsArcArrivantExist(CSommet* pArgDepart); //Vérifie si un arc partant du départ existe
 
-	void SOMAjouterPartant(CSommet* pArgSommet);
-	void SOMAjouterArrivant(CSommet* pArgSommet);
+	//void SOMAjouterArc(CSommet* pArgDestination); // Ajouter l'arc du sommet appelé vers la destination.
 
+<<<<<<< HEAD
 	void SOMSupprimerArcPartant(CSommet* pArgDestination); // Supprimer l'arc partant du sommet appelé vers la destination.
 	void SOMSupprimerArcArrivant(CSommet* pArgDepart);		//Supprimer l'arc arrivant du sommet appelé depuis le départ.
 
 
+=======
+	void SOMAjouterArcPartant(CSommet* pArgSommet);
+	void SOMAjouterArcArrivant(CSommet* pArgSommet);
+
+	void SOMSupprimerArcPartant(CSommet* pArgDestination); // Supprimer l'arc partant du sommet appelé vers la destination.
+	void SOMSupprimerArcArrivant(CSommet* pArgDepart);		//Supprimer l'arc arrivant du sommet appelé depuis le départ.
+	
+>>>>>>> 974191c99da34e82e01b1d20177585a0ce3773aa
 	
 	/* Retoure un arc du tableau des arcs arrivants.
 		Entrée : 
