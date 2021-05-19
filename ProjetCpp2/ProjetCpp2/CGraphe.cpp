@@ -16,13 +16,14 @@ CGraphe::CGraphe(CGraphe * GPHarg)
 
 CGraphe::~CGraphe() {
 	for (unsigned int uiDealloc = 0; uiDealloc < uiGPHNbSommets; uiDealloc++) {
-
+		delete ppSomGPHSommets[uiDealloc];
 	}
+	free(ppSomGPHSommets);
 }
 
 void CGraphe::GPHAjouterArc(CSommet* pArgSommetSource, CSommet* pArgSommetDestination) {
-	pArgSommetSource->SOMAjouterArcPartant(pArgSommetSource);
-	pArgSommetDestination->SOMAjouterArcArrivant(pArgSommetDestination);
+	pArgSommetSource->SOMAjouterArcPartant(pArgSommetDestination);
+	pArgSommetDestination->SOMAjouterArcArrivant(pArgSommetSource);
 }
 
 void CGraphe::GPHAjouterSommet(CSommet * pArgSommet)

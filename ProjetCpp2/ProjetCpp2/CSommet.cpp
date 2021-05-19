@@ -122,7 +122,7 @@ void CSommet::SOMAjouterArcPartant(CSommet* pArgDestination) {
 		else {
 			realloc(ppArcSomPartants, (uiSOMNbPartants + 1) * sizeof(CArc*));
 		}
-		ppArcSomPartants[uiSOMNbPartants] = new CArc(uiSOMNumero);
+		ppArcSomPartants[uiSOMNbPartants] = new CArc(pArgDestination->SOMGetNumero());
 		uiSOMNbPartants++;
 
 		std::cout << "testAjoutArc - fait" << std::endl;
@@ -144,7 +144,7 @@ void CSommet::SOMAjouterArcArrivant(CSommet* pArgDepart) {
 		else {
 			realloc(ppArcSomArrivants, (uiSOMNbArrivants + 1) * sizeof(CArc*));
 		}
-		ppArcSomArrivants[uiSOMNbArrivants] = new CArc(pArgDepart->uiSOMNumero);
+		ppArcSomArrivants[uiSOMNbArrivants] = new CArc(uiSOMNumero);
 		uiSOMNbArrivants++;
 		std::cout << "testAjoutArc - fait" << std::endl;
 	}

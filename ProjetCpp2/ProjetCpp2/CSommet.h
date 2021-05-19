@@ -32,6 +32,7 @@ public:
 	bool SOMIsEmptyPartants() {
 		return (uiSOMNbPartants == 0); 
 	}
+
 	int SOMIsArcPartantExist(CSommet* pArgDestination); //Vérifie si un arc vers la destination existe
 	int SOMIsArcArrivantExist(CSommet* pArgDepart); //Vérifie si un arc partant du départ existe
 
