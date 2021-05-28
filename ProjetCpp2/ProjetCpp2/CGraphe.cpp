@@ -4,12 +4,20 @@
 #define ERROR_SOMMET_EXIST "Le sommet existe deja"
 #define ERROR_SOMMET_NOT_EXIST "Le sommet n'existe pas"
 
+
+/* Constructeur par défaut
+*/
 CGraphe::CGraphe()
 {
 	ppSomGPHSommets = (CSommet**) malloc(sizeof(CSommet*));
 	uiGPHNbSommets = 0;
 }
 
+
+/* Constructeur de recopie
+		Entrée :
+			- GPHarg : Autre CGraphe à recopier
+*/
 CGraphe::CGraphe(CGraphe * GPHarg)
 {
 	unsigned int uiBoucle = 0;
@@ -31,6 +39,9 @@ CGraphe::CGraphe(CGraphe * GPHarg)
 	}
 }
 
+
+/* Destructeur
+*/
 CGraphe::~CGraphe() { // a corriger
 	
 	for (unsigned int uiDealloc = 0; uiDealloc < uiGPHNbSommets; uiDealloc++) {
@@ -40,11 +51,22 @@ CGraphe::~CGraphe() { // a corriger
 	ppSomGPHSommets = nullptr;
 }
 
+
+/* Fonction d'ajout d'arc
+		Entrée :
+			- pArgSommetSource : Pointeur vers le CSommet source de l'arc à ajouter
+			- pArgSommetDestination : Pointeur vers le CSommet destination de l'arc à ajouter
+*/
 void CGraphe::GPHAjouterArc(CSommet* pArgSommetSource, CSommet* pArgSommetDestination) {
 	pArgSommetSource->SOMAjouterArcPartant(pArgSommetDestination);
 	pArgSommetDestination->SOMAjouterArcArrivant(pArgSommetSource);
 }
 
+
+/* Fonction d'ajout de sommet
+		Entrée :
+			- pArgSommet : Pointeur vers le CSommet à ajouter
+*/
 void CGraphe::GPHAjouterSommet(CSommet * pArgSommet)
 {
 	try {
@@ -52,23 +74,17 @@ void CGraphe::GPHAjouterSommet(CSommet * pArgSommet)
 			throw new CException((char*)ERROR_SOMMET_EXIST);
 		}
 
-		//GPHDispSommets();
-
 		CSommet** ppNewSommets = (CSommet**) malloc(sizeof(CSommet*) * uiGPHNbSommets + 1);
 		for (unsigned int uiIndice = 0; uiIndice < uiGPHNbSommets + 1; uiIndice++) { // Ajout nouvel element -> +1
 			ppNewSommets[uiIndice] = (CSommet*) malloc(sizeof(CSommet));
 		}
-
 		if (ppSomGPHSommets != NULL) {
 			for (unsigned int uiIndice = 0; uiIndice < uiGPHNbSommets; uiIndice++) {
 				ppNewSommets[uiIndice] = ppSomGPHSommets[uiIndice];
 			}
 		}
-		
-
 		ppNewSommets[uiGPHNbSommets] = pArgSommet;
 
-		//GPHFreeSommets();
 		ppSomGPHSommets = ppNewSommets;
 		uiGPHNbSommets++;
 	}
@@ -77,6 +93,10 @@ void CGraphe::GPHAjouterSommet(CSommet * pArgSommet)
 	}
 }
 
+/* Fonction de suppression de sommet
+		Entrée :
+			- pArgSommet : Pointeur vers le CSommet à supprimer
+*/
 void CGraphe::GPHSupprimerSommet(CSommet * pArgSommet)
 {
 	try {
@@ -96,6 +116,10 @@ void CGraphe::GPHSupprimerSommet(CSommet * pArgSommet)
 	}
 }
 
+/* Fonction d'ajout d'arc
+		Entrée :
+			- pArgSommet : Pointeur vers le CSommet source de l'arc à ajouter
+*/
 int CGraphe::GPHIsSommetExists(CSommet * pArgSommet)
 {
 	bool bTrouve = false;
@@ -114,26 +138,14 @@ int CGraphe::GPHIsSommetExists(CSommet * pArgSommet)
 	return uiBoucle;
 }
 
+
+/* Fonction pour afficher le graphe
+*/
 void CGraphe::GPHAfficher()
 {
 	for (unsigned int uiBoucle = 0; uiBoucle < uiGPHNbSommets; uiBoucle++) {
 		ppSomGPHSommets[uiBoucle]->SOMAfficher();
 		std::cout << std::endl;
-	}
-}
-
-
-
-void CGraphe::GPHFreeSommets() {
-	for (unsigned int uiIndice = 0; uiIndice < uiGPHNbSommets; uiIndice++) {
-		free(ppSomGPHSommets[uiIndice]);
-	}
-}
-
-void CGraphe::GPHDispSommets() {
-	std::cout << "Sommets : " << std::endl;
-	for (unsigned int uiIndice = 0; uiIndice < uiGPHNbSommets; uiIndice++) {
-		std::cout << " - Sommet : " << ppSomGPHSommets[uiIndice]->SOMGetNumero() << std::endl;
 	}
 }
 

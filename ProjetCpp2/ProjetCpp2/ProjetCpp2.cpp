@@ -29,22 +29,6 @@ int main()
 
 	std::cout << "Sommets créés" << std::endl;
 
-	/*
-	graphe.GPHGetSommet(0)->SOMAjouterArc(graphe.GPHGetSommet(1));
-	std::cout << "test1000" << std::endl;
-	graphe.GPHGetSommet(0)->SOMAjouterArc(graphe.GPHGetSommet(2));
-	graphe.GPHGetSommet(0)->SOMAjouterArc(graphe.GPHGetSommet(3));
-	graphe.GPHGetSommet(0)->SOMAjouterArc(graphe.GPHGetSommet(4));
-	graphe.GPHGetSommet(1)->SOMAjouterArc(graphe.GPHGetSommet(5));
-	graphe.GPHGetSommet(2)->SOMAjouterArc(graphe.GPHGetSommet(5));
-	graphe.GPHGetSommet(2)->SOMAjouterArc(graphe.GPHGetSommet(6));
-	graphe.GPHGetSommet(3)->SOMAjouterArc(graphe.GPHGetSommet(5));
-	graphe.GPHGetSommet(3)->SOMAjouterArc(graphe.GPHGetSommet(6));
-	graphe.GPHGetSommet(4)->SOMAjouterArc(graphe.GPHGetSommet(6));
-	graphe.GPHGetSommet(5)->SOMAjouterArc(graphe.GPHGetSommet(7));
-	graphe.GPHGetSommet(6)->SOMAjouterArc(graphe.GPHGetSommet(7));
-	*/
-
 	graphe.GPHAjouterArc(s1, s2);
 	graphe.GPHAjouterArc(s1, s3);
 	graphe.GPHAjouterArc(s1, s4);
