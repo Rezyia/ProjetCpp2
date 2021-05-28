@@ -60,8 +60,10 @@ int main()
 
 	std::cout << "Arcs créés" << std::endl;
 
-	std::cout << "Affichage du graphe :" << std::endl;
+	std::cout << "\nAffichage du graphe :" << std::endl;
 	graphe.GPHAfficher();
+
+	std::cout << "Fin du programme." << std::endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

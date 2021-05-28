@@ -32,10 +32,12 @@ CGraphe::CGraphe(CGraphe * GPHarg)
 }
 
 CGraphe::~CGraphe() { // a corriger
+	
 	for (unsigned int uiDealloc = 0; uiDealloc < uiGPHNbSommets; uiDealloc++) {
 		delete ppSomGPHSommets[uiDealloc];
 	}
-	free(ppSomGPHSommets);
+	//free(ppSomGPHSommets);
+	ppSomGPHSommets = nullptr;
 }
 
 void CGraphe::GPHAjouterArc(CSommet* pArgSommetSource, CSommet* pArgSommetDestination) {
@@ -116,6 +118,7 @@ void CGraphe::GPHAfficher()
 {
 	for (unsigned int uiBoucle = 0; uiBoucle < uiGPHNbSommets; uiBoucle++) {
 		ppSomGPHSommets[uiBoucle]->SOMAfficher();
+		std::cout << std::endl;
 	}
 }
 

@@ -44,14 +44,18 @@ CSommet::CSommet(CSommet* SOMarg){
 
 
 CSommet::~CSommet(){
+	
 	 for (unsigned int uiBoucleDel = 0; uiBoucleDel < uiSOMNbArrivants; uiBoucleDel++) {
 		 delete ppArcSomArrivants[uiBoucleDel];
 	 }
 	 for (unsigned int uiBoucleDel = 0; uiBoucleDel < uiSOMNbPartants; uiBoucleDel++) {
 		 delete ppArcSomPartants[uiBoucleDel];
 	 }
+	 
 	 free(ppArcSomArrivants);
 	 free(ppArcSomPartants);
+	 ppArcSomArrivants = nullptr;
+	 ppArcSomPartants = nullptr;
 }
 
 
