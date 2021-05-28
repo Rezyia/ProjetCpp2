@@ -10,6 +10,7 @@ private:
 public:
 	CGraphe();
 	CGraphe(CGraphe* GPHarg);
+	CGraphe(char* pcNomFichier);
 	~CGraphe();
 
 	void GPHAjouterSommet(CSommet* pArgSommet);
@@ -20,7 +21,7 @@ public:
 
 	void GPHAfficher();
 
-	CSommet * GPHGetSommet(unsigned int uiIndice);
+	CSommet * GPHGetSommet(unsigned int uiNum);
 
 
 	/* Retourne un nouveau tableau de dimension uiArgNbNew avec les valeurs recopiées de ppArcArg

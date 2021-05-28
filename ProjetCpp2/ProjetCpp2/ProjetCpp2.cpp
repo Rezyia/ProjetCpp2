@@ -48,6 +48,9 @@ int main()
 	graphe.GPHAfficher();
 
 	std::cout << "Fin du programme." << std::endl;
+
+	CGraphe gFichier = new CGraphe((char*)"test.txt");
+	gFichier.GPHAfficher();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

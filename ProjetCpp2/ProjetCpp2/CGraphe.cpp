@@ -1,9 +1,15 @@
 #include "CGraphe.h"
 #include "CException.h"
+#include <fstream>
+#include <stdio.h>
+#include <cstring>
+
 
 #define ERROR_SOMMET_EXIST "Le sommet existe deja"
 #define ERROR_SOMMET_NOT_EXIST "Le sommet n'existe pas"
 
+#define NBRE_MAX_LIGNES_FICHIER 255
+#define NBRE_MAX_CHAMPS_FICHIER 32
 
 /* Constructeur par défaut
 */
@@ -37,6 +43,150 @@ CGraphe::CGraphe(CGraphe * GPHarg)
 			GPHAjouterArc(SomDepart, SomDestination);
 		}
 	}
+}
+
+/* Fonction pour obtenir la valeur suivante
+	Entrée : 
+		- pcLine : pointeur vers la ligne à "analyser"
+	Sortie : 
+		- char* de la valeur obtenue
+*/
+char* getLineValue(char* pcLine) {
+	char* pcValue = (char*)malloc((NBRE_MAX_LIGNES_FICHIER - NBRE_MAX_CHAMPS_FICHIER) * sizeof(char));
+	int indiceCourrant = 0;
+	int indiceValeurCourrante = 0;
+
+
+	// On passe jusqu'aux '=' :
+	while (pcLine[indiceCourrant] != '=' && indiceCourrant < NBRE_MAX_LIGNES_FICHIER) {
+		if (pcLine[indiceCourrant] == '\0' || pcLine[indiceCourrant] == '\n') // 
+			std::cout << "Erreur : fin de ligne imprévue\n";
+		indiceCourrant++;
+	}
+	indiceCourrant++; // Pour passer le '='
+
+
+	// Analyse de la valeur :
+	while (pcLine[indiceCourrant] != '\0' && pcLine[indiceCourrant] != '\n' && pcLine[indiceCourrant] != ',' && indiceCourrant < NBRE_MAX_LIGNES_FICHIER) {
+		pcValue[indiceValeurCourrante] = pcLine[indiceCourrant];
+
+		indiceValeurCourrante++;
+		indiceCourrant++;
+	}
+	pcValue[indiceValeurCourrante] = '\0';
+
+	return pcValue;
+}
+
+
+/* Constructeur par fichier
+	Entrée :
+		- pcNomFichier : nom du fichier 
+*/
+CGraphe::CGraphe(char* pcNomFichier) {
+	// Ouverture du fichier :
+	std::ifstream ifsFichier(pcNomFichier);
+
+	if (!ifsFichier.is_open()) {
+		std::cout << "Le fichier n'a pas pu être ouvert\n";
+	}
+	// Si fichier ouvert correctement :
+	else {
+		unsigned int uiNbArcs = 0;
+		int iNumChamps = 0;
+		char cLigne[NBRE_MAX_LIGNES_FICHIER];
+
+		// Récupère la première ligne du fichier :
+		ifsFichier >> cLigne;
+
+		int indiceCourrant = 0;
+		int indiceValeurCourrante = 0;
+		char* valeurCourrante = (char*)malloc((NBRE_MAX_LIGNES_FICHIER - NBRE_MAX_CHAMPS_FICHIER) * sizeof(char));
+
+		// On suppose que le format est respecté
+
+		// Tant que tous les champs n'ont pas été complétés :
+		while (iNumChamps < 4 && ifsFichier.good()) { // 4 champs nécessaires : NBSommets, NBArcs, Sommets et Arcs
+			//Pour chaque ligne du fichier :
+			valeurCourrante = getLineValue(cLigne);
+
+			// Affectation des attributs :
+			switch (iNumChamps) {
+				// NBSommet :
+			case 0:
+				uiGPHNbSommets = atoi((const char*)valeurCourrante);
+				break;
+
+
+				// NBArcs :
+			case 1:
+				uiNbArcs = atoi((const char*)valeurCourrante);
+				break;
+
+
+				// Sommets :
+			case 2:
+			{
+				// Initialisation tableau sommets : 
+				ppSomGPHSommets = (CSommet**)malloc(uiGPHNbSommets * sizeof(CSommet*));
+				unsigned int uiBoucleInitSommets = 0;
+
+				// Retour à la ligne (début des valeurs) :
+				ifsFichier >> cLigne;
+
+				while (uiBoucleInitSommets < uiGPHNbSommets) {
+					// Ajout nouveau CSommet :
+					GPHAjouterSommet(new CSommet(atoi((const char*) getLineValue(cLigne))));
+
+					// Passage à la valeur suivante :
+					ifsFichier >> cLigne;
+
+					uiBoucleInitSommets++;
+				}
+			}
+			break;
+
+				// Arcs :
+			case 3:
+			{
+				unsigned int uiBoucleInitArcs= 0;
+
+				// Retour à la ligne (début des valeurs) :
+				ifsFichier >> cLigne;
+
+				while (uiBoucleInitArcs< uiGPHNbSommets) {
+
+					const char* pccVal1 = getLineValue(cLigne); // Numéro sommet début arc
+					const char* pccVal2 = getLineValue((char*)pccVal1); // Numéro sommet fin arc
+
+					CSommet* pSOMdebut = GPHGetSommet(atoi(pccVal1));
+					CSommet* pSOMfin = GPHGetSommet(atoi(pccVal2));
+
+					// Ajout nouvel arc :
+					GPHAjouterArc(pSOMdebut, pSOMfin);
+
+					// Passage à la valeur suivante :
+					ifsFichier >> cLigne;
+
+					uiBoucleInitArcs++;
+				}
+			}
+			break;
+
+
+			default:
+				std::cout << "switch défaut, erreur rencontrée" << std::endl;
+				break;
+			}
+
+
+
+			// Passage au champs suivant :
+			iNumChamps++;
+			ifsFichier >> cLigne;
+		}
+	}
+	//std::cout << "Fin constructeur par fichier. \n";
 }
 
 
@@ -116,9 +266,9 @@ void CGraphe::GPHSupprimerSommet(CSommet * pArgSommet)
 	}
 }
 
-/* Fonction d'ajout d'arc
+/* Fonction de vérification de doublons
 		Entrée :
-			- pArgSommet : Pointeur vers le CSommet source de l'arc à ajouter
+			- pArgSommet : Pointeur vers le CSommet de l'arc à vérifier
 */
 int CGraphe::GPHIsSommetExists(CSommet * pArgSommet)
 {
@@ -150,12 +300,12 @@ void CGraphe::GPHAfficher()
 }
 
 
-// Getter : retourne le pointeur CSommet d'indice uiIndice
-CSommet* CGraphe::GPHGetSommet(unsigned int uiIndice) {
+// Getter : retourne le pointeur CSommet de numéro uiNum
+CSommet* CGraphe::GPHGetSommet(unsigned int uiNum) {
 	try {
 		unsigned int uiBoucle = 0;
 		for (uiBoucle; uiBoucle < uiGPHNbSommets; uiBoucle++) {
-			if (ppSomGPHSommets[uiBoucle]->SOMGetNumero() == uiIndice) {
+			if (ppSomGPHSommets[uiBoucle]->SOMGetNumero() == uiNum) {
 				return ppSomGPHSommets[uiBoucle];
 			}
 		}

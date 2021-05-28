@@ -69,18 +69,6 @@ public:
 	}
 
 
-	/* Retourne un nouveau tableau de dimension uiArgNbNew avec les valeurs recopiées de ppArcArg
-		Entrée :
-			- ppArcArg : Tableau a copier
-			- uiArgNbNew : Taille du nouveau tableau
-			- uiArgNbOld : Taille de l'ancien tableau
-		Sortie :
-			- Recopie de l'ancien tableau avec les nouvelles dimensions
-	*/
-	CArc** SOMCopieTabArcs(CArc** ppArcArg, unsigned int uiArgNbNew, unsigned int uiArgNbOld);
-
-
-
 	// Getter : retourne le numéro du sommet
 	unsigned int SOMGetNumero() {
 		return uiSOMNumero;

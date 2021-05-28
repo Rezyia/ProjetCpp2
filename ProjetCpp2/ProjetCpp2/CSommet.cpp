@@ -4,6 +4,9 @@
 #define ERROR_ARC_EXIST "L'arc existe deja"
 #define ERROR_ARC_NOT_EXIST "L'arc n'existe pas"
 
+
+/* Constructeur par défaut :
+*/
 CSommet::CSommet() {
 	uiSOMNumero = -1;
 	uiSOMNbArrivants = 0;
@@ -13,6 +16,10 @@ CSommet::CSommet() {
 }
 
 
+/* Constructeur de confort :
+		Entrée :
+			- uiArg : Numéro du sommet
+*/
 CSommet::CSommet(unsigned int uiArg){
 	uiSOMNumero = uiArg;
 	uiSOMNbArrivants = 0;
@@ -22,6 +29,10 @@ CSommet::CSommet(unsigned int uiArg){
 }
 
 
+/* Constructeur de recopie
+		Entrée :
+			- SOMarg : pointeur du CSommet à recopier
+*/
 CSommet::CSommet(CSommet* SOMarg){
 	uiSOMNumero = SOMarg->SOMGetNumero();
 	uiSOMNbPartants = SOMarg->SOMGetNbPartants();
@@ -43,6 +54,8 @@ CSommet::CSommet(CSommet* SOMarg){
 }
 
 
+/* Destructeur
+*/
 CSommet::~CSommet(){
 	
 	 for (unsigned int uiBoucleDel = 0; uiBoucleDel < uiSOMNbArrivants; uiBoucleDel++) {
@@ -59,20 +72,8 @@ CSommet::~CSommet(){
 }
 
 
-CArc** CSommet::SOMCopieTabArcs(CArc** ppArcArg, unsigned int uiArgNbNew, unsigned int uiArgNbOld) {
-	CArc** newTab = (CArc**) malloc(sizeof(CArc*) * uiArgNbNew);
-
-	unsigned int uiMinNb = uiArgNbNew;
-	if (uiMinNb > uiArgNbOld) uiMinNb = uiArgNbOld;
-
-	// On suppose qu'il n'y aura pas de copie de dimensions plus faible
-	for (unsigned int uiBoucleCopie = 0; uiBoucleCopie < uiMinNb; uiBoucleCopie++) {
-		newTab[uiBoucleCopie] = ppArcArg[uiBoucleCopie];
-	}
-
-	return newTab;
-}
-
+/* Fonction d'affichage d'un sommet 
+*/
 void CSommet::SOMAfficher()
 {
 	std::cout << "Sommet numero " << SOMGetNumero() << ":" << std::endl;
@@ -89,6 +90,10 @@ void CSommet::SOMAfficher()
 }
 
 
+/* Fonction de vérification de doublons d'arc partant
+		Entrée :
+			- pArgDestination : Pointeur vers le CSommet de l'arc à vérifier
+*/
 int CSommet::SOMIsArcPartantExist(CSommet * pArgDestination)
 {
 	bool bTrouve = false;
@@ -107,6 +112,11 @@ int CSommet::SOMIsArcPartantExist(CSommet * pArgDestination)
 	return uiBoucle;
 }
 
+
+/* Fonction de vérification de doublons d'arc arrivant
+		Entrée :
+			- pArgDepart : Pointeur vers le CSommet de l'arc à vérifier
+*/
 int CSommet::SOMIsArcArrivantExist(CSommet * pArgDepart)
 {
 	bool bTrouve = false;
@@ -125,6 +135,11 @@ int CSommet::SOMIsArcArrivantExist(CSommet * pArgDepart)
 	return uiBoucle;
 }
 
+
+/* Fonction d'ajout d'arc partant
+		Entrée :
+			- pArgDestination : Pointeur vers le CSommet de l'arc à ajouter
+*/
 void CSommet::SOMAjouterArcPartant(CSommet* pArgDestination) {
 	try {
 		// Si l'arc existe deja :
@@ -148,6 +163,11 @@ void CSommet::SOMAjouterArcPartant(CSommet* pArgDestination) {
 	}
 }
 
+
+/* Fonction d'ajout d'arc arrivant
+		Entrée :
+			- pArgDepart : Pointeur vers le CSommet de l'arc à ajouter
+*/
 void CSommet::SOMAjouterArcArrivant(CSommet* pArgDepart) {
 	try {
 		if (SOMIsArcArrivantExist(pArgDepart) != -1) {
@@ -167,6 +187,11 @@ void CSommet::SOMAjouterArcArrivant(CSommet* pArgDepart) {
 	}
 }
 
+
+/* Fonction de suppression d'arc partant
+		Entrée :
+			- pArgDestination : Pointeur vers le CSommet de l'arc à supprimer
+*/
 void CSommet::SOMSupprimerArcPartant(CSommet * pArgDestination)
 {
 	try {
@@ -187,6 +212,11 @@ void CSommet::SOMSupprimerArcPartant(CSommet * pArgDestination)
 	}
 }
 
+
+/* Fonction de suppression d'arc arrivant
+		Entrée :
+			- pArgDepart : Pointeur vers le CSommet de l'arc à supprimer
+*/
 void CSommet::SOMSupprimerArcArrivant(CSommet * pArgDepart)
 {
 	try {
@@ -206,5 +236,3 @@ void CSommet::SOMSupprimerArcArrivant(CSommet * pArgDepart)
 		std::cout << EXClevee.EXCLireErreur() << std::endl;
 	}
 }
-
-
