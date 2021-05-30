@@ -18,7 +18,7 @@ public:
 
 	// Fonction d'affichage de l'arc
 	void ARCAfficher() {
-		std::cout << "\tArc vers " + uiARCDestination;
+		std::cout << "\tArc vers " << uiARCDestination;
 	}
 
 	// Getter : retourne le numéro de destination de l'arc

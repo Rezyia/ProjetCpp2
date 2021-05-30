@@ -93,8 +93,7 @@ public:
 	CArc** SOMGetPartants() {
 		return ppArcSomPartants;
 	}
-
-<<<<<<< HEAD
+	
 	void SOMSetArrivants(CArc** ppArcArg) {
 		ppArcSomArrivants = ppArcArg;
 	}
@@ -111,16 +110,8 @@ public:
 		uiSOMNbPartants = uiArg;
 	}
 
-
-	/* Associe le numéro du sommet avec l'argument passé en paramètre
-		Entrée :
-			- uiArgNum : Nouveau numéro du sommet
-	*/
 	void SOMSetNumero(unsigned int uiArgNum) {
 		uiSOMNumero = uiArgNum;
 	}
-
-=======
->>>>>>> 285898855e584832d9c4509e13b1da9fbd324158
 	void SOMAfficher();
 };
