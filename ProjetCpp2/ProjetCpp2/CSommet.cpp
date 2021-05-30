@@ -83,7 +83,7 @@ void CSommet::SOMAfficher()
 	else {
 		std::cout << "Arc partant depuis ce sommet :" << std::endl;
 		for (unsigned int uiBoucle = 0; uiBoucle < uiSOMNbPartants; uiBoucle++) {
-			std::cout << "\tArc vers sommet numero " << ppArcSomPartants[uiBoucle]->ARCGetNumero() << std::endl;
+			ppArcSomPartants[uiBoucle]->ARCAfficher();
 		}
 	}
 	
