@@ -21,6 +21,8 @@ public:
 
 	void GPHAfficher();
 
+	CGraphe* GPHGetInverse();
+
 	CSommet * GPHGetSommet(unsigned int uiNum);
 
 	CSommet** GPHGetAllSommet() {

@@ -6,6 +6,7 @@
 
 int main()
 {
+	// Création manuelle :
 	CGraphe graphe = new CGraphe();
 
 	std::cout << "CGraphe créé" << std::endl;
@@ -47,26 +48,20 @@ int main()
 	std::cout << "\nAffichage du graphe :" << std::endl;
 	graphe.GPHAfficher();
 
-	std::cout << "Fin du programme." << std::endl;
 
-	CGraphe gFichier = new CGraphe((char*)"test.txt");
-	gFichier.GPHAfficher();
+	// Création à partir d'un fichier :
+	CGraphe* gFichier = new CGraphe((char*)"Text.txt");
+	std::cout << "\nAffichage du graphe par fichier :" << std::endl;
+	gFichier->GPHAfficher();
 
-	//Tentative de création de graphe inverse
-	CGraphe graphe_inverse = new CGraphe(graphe);
-	for (unsigned int uiBoucle = 0; uiBoucle < graphe_inverse.GPHGetNbSommet(); uiBoucle++) {
-		CSommet* pSomBoucle = graphe_inverse.GPHGetAllSommet()[uiBoucle];
 
-		CArc** ppArcTmp = pSomBoucle->SOMGetPartants();
-		unsigned int uiTmp = pSomBoucle->SOMGetNbPartants();
-
-		pSomBoucle->SOMSetPartants(pSomBoucle->SOMGetArrivants());
-		pSomBoucle->SOMSetNbPartants(pSomBoucle->SOMGetNbArrivants());
-
-		pSomBoucle->SOMSetArrivants(ppArcTmp);
-		pSomBoucle->SOMSetNbArrivants(uiTmp);
-	}
+	// Création du graphe inverse :
+	CGraphe graphe_inverse = graphe.GPHGetInverse();
+	std::cout << "\nAffichage du graphe inverse :" << std::endl;
 	graphe_inverse.GPHAfficher();
+
+
+	std::cout << "\nFin du programme." << std::endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

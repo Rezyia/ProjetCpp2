@@ -92,6 +92,7 @@ CGraphe::CGraphe(char* pcNomFichier) {
 	}
 	// Si fichier ouvert correctement :
 	else {
+		unsigned int uiNbSommets = 0;
 		unsigned int uiNbArcs = 0;
 		int iNumChamps = 0;
 		char cLigne[NBRE_MAX_LIGNES_FICHIER];
@@ -114,7 +115,7 @@ CGraphe::CGraphe(char* pcNomFichier) {
 			switch (iNumChamps) {
 				// NBSommet :
 			case 0:
-				uiGPHNbSommets = atoi((const char*)valeurCourrante);
+				uiNbSommets = atoi((const char*)valeurCourrante);
 				break;
 
 
@@ -128,13 +129,13 @@ CGraphe::CGraphe(char* pcNomFichier) {
 			case 2:
 			{
 				// Initialisation tableau sommets : 
-				ppSomGPHSommets = (CSommet**)malloc(uiGPHNbSommets * sizeof(CSommet*));
+				ppSomGPHSommets = (CSommet**)malloc(uiNbSommets * sizeof(CSommet*));
 				unsigned int uiBoucleInitSommets = 0;
 
 				// Retour à la ligne (début des valeurs) :
 				ifsFichier >> cLigne;
 
-				while (uiBoucleInitSommets < uiGPHNbSommets) {
+				while (uiBoucleInitSommets < uiNbSommets) {
 					// Ajout nouveau CSommet :
 					GPHAjouterSommet(new CSommet(atoi((const char*) getLineValue(cLigne))));
 
@@ -157,7 +158,10 @@ CGraphe::CGraphe(char* pcNomFichier) {
 				while (uiBoucleInitArcs< uiGPHNbSommets) {
 
 					const char* pccVal1 = getLineValue(cLigne); // Numéro sommet début arc
-					const char* pccVal2 = getLineValue((char*)pccVal1); // Numéro sommet fin arc
+
+					// valeur suivante :
+					ifsFichier >> cLigne;
+					const char* pccVal2 = getLineValue(cLigne); // Numéro sommet fin arc
 
 					CSommet* pSOMdebut = GPHGetSommet(atoi(pccVal1));
 					CSommet* pSOMfin = GPHGetSommet(atoi(pccVal2));
@@ -178,7 +182,6 @@ CGraphe::CGraphe(char* pcNomFichier) {
 				std::cout << "switch défaut, erreur rencontrée" << std::endl;
 				break;
 			}
-
 
 
 			// Passage au champs suivant :
@@ -274,7 +277,7 @@ int CGraphe::GPHIsSommetExists(CSommet * pArgSommet)
 {
 	bool bTrouve = false;
 	unsigned int uiBoucle = 0;
-	while (!bTrouve && uiBoucle != uiGPHNbSommets) {
+	while (!bTrouve && uiBoucle < uiGPHNbSommets) {
 		if (ppSomGPHSommets[uiBoucle]->SOMGetNumero() == pArgSommet->SOMGetNumero()) {
 			bTrouve = true;
 		}
@@ -315,4 +318,31 @@ CSommet* CGraphe::GPHGetSommet(unsigned int uiNum) {
 		std::cout << EXClevee.EXCLireErreur();
 	}
 	return nullptr;
+}
+
+
+CGraphe* CGraphe::GPHGetInverse() {
+	CGraphe* newGraphe = new CGraphe();
+	
+	// Copie sommets avec numéro uniquement :
+	for (unsigned int uiCpSom = 0; uiCpSom < uiGPHNbSommets; uiCpSom++) {
+		CSommet* pSOMCurrent = new CSommet(ppSomGPHSommets[uiCpSom]->SOMGetNumero());
+
+		newGraphe->GPHAjouterSommet(pSOMCurrent);
+	}
+
+	// Swap des arcs :
+	for (unsigned int uiCpSom = 0; uiCpSom < uiGPHNbSommets; uiCpSom++) {
+		CSommet* pSOMCurrent = newGraphe->ppSomGPHSommets[uiCpSom]; // Sommet nouveau graphe
+		CSommet* pSOMSource = ppSomGPHSommets[uiCpSom]; // Sommet ancien graphe
+
+		// Pour chaque arc partant :
+		for (unsigned int uiArcSwap = 0; uiArcSwap < pSOMSource->SOMGetNbPartants(); uiArcSwap++) {
+			unsigned int uiNumNewOrigine = pSOMSource->SOMGetArcPartant(uiArcSwap)->ARCGetNumero(); // Nouveau numéro d'origine / Destination = pSOMCurrent
+			CSommet* pSOMOrigine = newGraphe->GPHGetSommet(uiNumNewOrigine); // Sommet origine du nouvel arc
+
+			newGraphe->GPHAjouterArc(pSOMOrigine, pSOMCurrent);
+		}
+	}
+	return newGraphe;
 }
