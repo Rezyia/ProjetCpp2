@@ -51,6 +51,22 @@ int main()
 
 	CGraphe gFichier = new CGraphe((char*)"test.txt");
 	gFichier.GPHAfficher();
+
+	//Tentative de création de graphe inverse
+	CGraphe graphe_inverse = new CGraphe(graphe);
+	for (unsigned int uiBoucle = 0; uiBoucle < graphe_inverse.GPHGetNbSommet(); uiBoucle++) {
+		CSommet* pSomBoucle = graphe_inverse.GPHGetAllSommet()[uiBoucle];
+
+		CArc** ppArcTmp = pSomBoucle->SOMGetPartants();
+		unsigned int uiTmp = pSomBoucle->SOMGetNbPartants();
+
+		pSomBoucle->SOMSetPartants(pSomBoucle->SOMGetArrivants());
+		pSomBoucle->SOMSetNbPartants(pSomBoucle->SOMGetNbArrivants());
+
+		pSomBoucle->SOMSetArrivants(ppArcTmp);
+		pSomBoucle->SOMSetNbArrivants(uiTmp);
+	}
+	graphe_inverse.GPHAfficher();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

@@ -84,13 +84,30 @@ public:
 		return uiSOMNbArrivants;
 	}
 
-	// Getter : retourne le nombre d'arcs arrivants au sommet
+	// Getter : retourne les arcs arrivants au sommet
 	CArc** SOMGetArrivants() {
 		return ppArcSomArrivants;
 	}
 
+	// Getter : retourne les arcs partant du sommet
 	CArc** SOMGetPartants() {
 		return ppArcSomPartants;
+	}
+
+	void SOMSetArrivants(CArc** ppArcArg) {
+		ppArcSomArrivants = ppArcArg;
+	}
+
+	void SOMSetPartants(CArc** ppArcArg) {
+		ppArcSomPartants = ppArcArg;
+	}
+
+	void SOMSetNbArrivants(unsigned int uiArg) {
+		uiSOMNbArrivants = uiArg;
+	}
+
+	void SOMSetNbPartants(unsigned int uiArg) {
+		uiSOMNbPartants = uiArg;
 	}
 
 
