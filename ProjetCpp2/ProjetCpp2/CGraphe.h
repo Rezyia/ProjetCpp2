@@ -23,6 +23,13 @@ public:
 
 	CSommet * GPHGetSommet(unsigned int uiNum);
 
+	CSommet** GPHGetAllSommet() {
+		return ppSomGPHSommets;
+	}
+
+	unsigned int GPHGetNbSommet() {
+		return uiGPHNbSommets;
+	}
 
 	/* Retourne un nouveau tableau de dimension uiArgNbNew avec les valeurs recopiées de ppArcArg
 		Entrée :
