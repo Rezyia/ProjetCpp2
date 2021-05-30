@@ -4,9 +4,13 @@
 #include <iostream>
 #include "CGraphe.h"
 
-int main()
+int main(int argc, char* argv[])
 {
-	// Création manuelle :
+	if (argc != 2) {
+		std::cout << "Ce programme nécessite 1 SEUL paramètre correspondant au nom du fichier à utiliser." << std::endl;
+	}
+
+	/* Création manuelle :
 	CGraphe graphe = new CGraphe();
 
 	std::cout << "CGraphe créé" << std::endl;
@@ -47,16 +51,16 @@ int main()
 
 	std::cout << "\nAffichage du graphe :" << std::endl;
 	graphe.GPHAfficher();
-
+	*/
 
 	// Création à partir d'un fichier :
-	CGraphe* gFichier = new CGraphe((char*)"Text.txt");
+	CGraphe* gFichier = new CGraphe(argv[1]);
 	std::cout << "\nAffichage du graphe par fichier :" << std::endl;
 	gFichier->GPHAfficher();
 
 
 	// Création du graphe inverse :
-	CGraphe graphe_inverse = graphe.GPHGetInverse();
+	CGraphe graphe_inverse = gFichier->GPHGetInverse();
 	std::cout << "\nAffichage du graphe inverse :" << std::endl;
 	graphe_inverse.GPHAfficher();
 
