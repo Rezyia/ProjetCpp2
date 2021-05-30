@@ -94,6 +94,7 @@ public:
 		return ppArcSomPartants;
 	}
 
+<<<<<<< HEAD
 	void SOMSetArrivants(CArc** ppArcArg) {
 		ppArcSomArrivants = ppArcArg;
 	}
@@ -119,5 +120,7 @@ public:
 		uiSOMNumero = uiArgNum;
 	}
 
+=======
+>>>>>>> 285898855e584832d9c4509e13b1da9fbd324158
 	void SOMAfficher();
 };
