@@ -94,40 +94,5 @@ public:
 		return ppArcSomPartants;
 	}
 
-	void SOMSetArrivants(CArc** ppArcArg) {
-		ppArcSomArrivants = ppArcArg;
-	}
-
-	void SOMSetPartants(CArc** ppArcArg) {
-		ppArcSomPartants = ppArcArg;
-	}
-
-	void SOMSetNbArrivants(unsigned int uiArg) {
-		uiSOMNbArrivants = uiArg;
-	}
-
-	void SOMSetNbPartants(unsigned int uiArg) {
-		uiSOMNbPartants = uiArg;
-	}
-
-
-	void SOMIncrementNbArrivants() {
-		uiSOMNbArrivants++;
-	}
-
-
-	/* Associe le numéro du sommet avec l'argument passé en paramètre
-		Entrée :
-			- uiArgNum : Nouveau numéro du sommet
-	*/
-	void SOMSetNumero(unsigned int uiArgNum) {
-		uiSOMNumero = uiArgNum;
-	}
-
-
-	void SOMSetArrivant(unsigned int uiArgNum, CArc* newArc) {
-		ppArcSomArrivants[uiArgNum] = newArc;
-	}
-
 	void SOMAfficher();
 };
